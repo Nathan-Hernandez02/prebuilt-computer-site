@@ -20,6 +20,10 @@ app = Flask(__name__)
 
 app.secret_key = secrets.token_hex() 
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, relationship
+from sqlalchemy import Column, Integer, ForeignKey, String
 
 from logging.config import dictConfig
 
@@ -35,7 +39,7 @@ dictConfig({
     },
      'file.handler': {
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'weatherportal.log',
+            'filename': 'ShawnsPC.log',
             'maxBytes': 10000000,
             'backupCount': 5,
             'level': 'DEBUG',
@@ -48,7 +52,52 @@ dictConfig({
 })
 
 
+# SQLite Database creation for the website
+Base = declarative_base()
+engine = create_engine("sqlite:///ShawnsPC.db", echo=True, future=True)
+DBSession = sessionmaker(bind=engine)
 
+
+#Creates the table for the session.
+#holds the customers order.
+@app.before_first_request
+def create_tables():
+    Base.metadata.create_all(engine)
+
+
+
+# Logs a user into the site.
+# Allows them to purchase item.
+# users can have the same username but not the same password
+# passwords must be hidden in the SQL
+#FEATURES:
+    # see order progress
+    # cancel order before it is done.
+def login():
+    
+    return
+
+# Handles the user buying the computer.
+# needs to update the log (dbsession)?.
+# need to find long term storage...
+def buy_computer():
+    
+    return
+
+# Will allow admin to see orders.
+# Will place it out on a list.
+# FEATURES:
+    # Allow admin to say a order is ready.
+    # sees all order history
+def admin():
+    
+    return
+
+# will get all the orders that were made.
+# will probably need to be split up between (completed, canceled, pending)
+def get_orders():
+    
+    return
 
 
 
