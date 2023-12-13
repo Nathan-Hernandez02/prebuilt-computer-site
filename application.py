@@ -100,18 +100,10 @@ def get_orders():
     return
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+# Logs out user (Need maybe 2 methods for admin / user)
+def logout():
+    
+    return
 
 
 
